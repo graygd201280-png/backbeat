@@ -11,6 +11,8 @@ header{border-bottom:1px solid var(--line);background:#14161c}.mast,main{max-wid
 .bar-nav{margin-bottom:14px}.bar-tabs{display:contents}.bar-tabs button.is-playing{box-shadow:inset 0 -2px var(--violet)}.bar[hidden]{display:none}.section-head{justify-content:space-between;margin-bottom:12px}h1,h2,h3,p{margin:0}h1{font-size:25px;letter-spacing:-.6px}h2{font-size:17px}.hint,.meta,.legend{color:var(--dim);font-size:13px}.legend{gap:14px;margin-bottom:14px}.legend b{color:#d3c6ff;margin-right:3px}.legend .ghost{opacity:.55}.status{color:#d8caff;margin-left:auto}.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;align-items:start}.layout.with-mixer{grid-template-columns:minmax(0,1fr) 255px}.layout>div{min-width:0}.bar{background:var(--panel);border:1px solid var(--line);border-radius:13px;margin-bottom:13px;overflow:hidden}.bar.fill{border-color:#5a467f}.bar-head{padding:11px 13px;justify-content:space-between;gap:10px}.fill .bar-head{background:#231c33}.bar-title{display:flex;align-items:center;gap:9px}.tag{font-size:12px;background:#303542;border-radius:5px;color:#c0c5d5;padding:2px 6px}.fill .tag{background:#493566;color:#e3d3ff}.bar-tools{gap:5px}.bar-tools button,.bar-tools select{font-size:13px;padding:5px 7px}.generate{color:#e6d9ff;background:#3c2c58;border-color:#654e95}.grid-scroll{overflow-x:auto;scrollbar-color:#56536a #16181e;padding-bottom:7px}.grid{display:grid;grid-template-columns:var(--label) repeat(var(--count),minmax(var(--step),1fr));width:max(100%,calc(var(--label) + var(--count)*var(--step)));align-items:stretch;position:relative}.track-label,.ruler-label{position:sticky;left:0;z-index:2;background:#1a1d25;border-top:1px solid #262a34;display:flex;align-items:center;gap:7px;border-right:1px solid #343847;padding-left:10px;font-size:13px;white-space:nowrap}.track-label button{border:0;background:none;padding:0;color:#e2e4ed;text-align:left}.track-label i{width:6px;height:13px;border-radius:3px;background:var(--tone)}.ruler-label{font-size:11px;letter-spacing:.1em;color:#a2a8b9}.ruler{font:11px/24px ui-monospace,monospace;color:#878da0;text-align:center;border-top:1px solid #262a34}.ruler.beat{color:#ede5ff;font-weight:bold}.step-wrap{height:30px;display:grid;place-items:stretch;padding:4px 3px;border-top:1px solid #252933}.grid .alt{background-color:#20232e}.grid .beat{border-left:1px solid #404453}.step{padding:0;border-radius:4px;border:1px solid #343a48;background:#2a303c;position:relative;touch-action:none;user-select:none}.step:hover{border-color:var(--tone);background:#3b4050}.step[data-v="1"]{background:color-mix(in srgb,var(--tone) 58%,#20232d);border-color:color-mix(in srgb,var(--tone) 70%,#20232d)}.step[data-v="2"]{background:var(--tone);border-color:var(--tone);box-shadow:0 0 7px color-mix(in srgb,var(--tone) 55%,transparent)}.step[data-v="3"]::after{content:'';position:absolute;inset:0;margin:auto;width:6px;height:6px;border-radius:50%;background:var(--tone);opacity:.74}.step-wrap.current,.ruler.current{background:#524373;box-shadow:inset 2px 0 #bfaaff,inset -1px 0 #9680d6}.bar.playing{box-shadow:0 0 0 1px #8f78c5}.mixer{border:1px solid var(--line);background:var(--panel);border-radius:13px;padding:12px;position:sticky;top:10px}.mixer[hidden]{display:none}.mix-track{border-top:1px solid var(--line);padding:8px 0}.mix-top{display:flex;align-items:center;gap:5px}.mix-top strong{margin-right:auto;font-size:13px;color:var(--tone)}.mix-top button{padding:2px 6px;font-size:12px}.mix-track label{display:grid;grid-template-columns:42px 1fr 34px;align-items:center;gap:5px;font-size:12px;color:var(--dim)}.mix-track input{width:100%}.mix-track output{text-align:right}.mixer h2{margin-bottom:8px}dialog{color:var(--text);background:var(--panel);border:1px solid #55506a;border-radius:14px;padding:19px;max-width:calc(100vw - 24px)}dialog::backdrop{background:#000a}dialog form{display:grid;gap:12px;min-width:min(310px,72vw)}dialog label{display:grid;gap:4px}dialog .tools{justify-content:flex-end}
 @media(max-width:1050px){.layout.with-mixer{grid-template-columns:minmax(0,1fr)}.mixer{grid-row:1;position:static}.mix-body{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:0 15px}}
 @media(max-width:600px){:root{--step:30px;--label:96px}.mast,main{padding-inline:11px}.brand strong{font-size:20px}.transport{padding:11px;gap:9px}.readout{margin:0}.track-label{padding-left:5px;font-size:12px}.status{margin-left:0}.bar-head{padding:9px}.tools button{font-size:13px}}
+.layer-nav{margin-bottom:12px}.layer-nav button{font-size:13px}.track-label.has-note{display:grid;grid-template-columns:6px minmax(0,1fr) auto;gap:4px;padding-right:4px}.track-label button{text-overflow:ellipsis;overflow:hidden;white-space:nowrap}.track-label select{min-width:0;width:50px;padding:2px;font:11px ui-monospace,monospace;border-radius:4px}.grid.notes{--label:154px}.mixer{max-height:calc(100dvh - 20px);overflow:auto}
+@media(max-width:1050px){.mixer{max-height:none}}
 </style>
 </head>
 <body>
@@ -28,6 +30,7 @@ header{border-bottom:1px solid var(--line);background:#14161c}.mast,main{max-wid
 </section>
 <div class="section-head"><div><h1>Pattern editor</h1><p class="meta" id="pattern"></p></div><div class="tools"><button id="dup">Duplicate Bar 1 → 2 &amp; 3</button><button id="add">+ Add Bar</button><button id="remove">− Remove Bar</button><button id="clear-all">Clear All Bars</button><button id="mix" aria-pressed="false">Mixer</button></div></div>
 <nav class="tools bar-nav" aria-label="Bar view"><button id="all-view" aria-pressed="false">All Bars</button><button id="single-view" aria-pressed="true">Single Bar</button><button id="previous" aria-label="Previous bar">&lt;</button><div id="bar-tabs" class="bar-tabs" role="group" aria-label="Select bar"></div><button id="next" aria-label="Next bar">&gt;</button><button id="follow" aria-pressed="false">Follow Playhead</button></nav>
+<div id="layer-nav" class="tools layer-nav" role="group" aria-label="Track layers"></div>
 <div class="legend"><span><b>■</b> Normal</span><span><b>◆</b> Accent</span><span><b class="ghost">●</b> Ghost</span><span>Click to cycle · Drag to paint · Right-click to clear</span><span id="status" class="status" role="status"></span></div>
 <div class="layout" id="layout"><div id="bars"></div><aside class="mixer" id="mixer" hidden><h2>Kit mixer</h2><div id="mix-body" class="mix-body"></div></aside></div>
 </main>
@@ -38,8 +41,20 @@ const $ = id => document.getElementById(id);
 const tracks = [
   ['Crash Cymbal','#ffcb76'], ['Ride Cymbal','#ebaa53'], ['Open Hi-Hat','#e8bc76'],
   ['Closed Hi-Hat','#d6a85e'], ['High Tom','#83e6ec'], ['Mid Tom','#62bde9'],
-  ['Floor Tom','#8e9cf9'], ['Snare Drum','#ff8198'], ['Kick Drum','#71dfad']
+  ['Floor Tom','#8e9cf9'], ['Snare Drum','#ff8198'], ['Kick Drum','#71dfad'],
+  ['Rim / Woodblock','#ffac85'], ['Cowbell','#ffc088'], ['Clap / Snap','#ff91a9'],
+  ['Reverse Riser','#bba1ff'], ['Sub Impact','#c78df3'],
+  ['Synth Bass','#77e0c8',36], ['Chord Stab','#96b6ff',60], ['Arp Pluck','#f299d6',72]
 ];
+const drumCount=9, bassRow=14, riserRow=12, impactRow=13;
+const noteTracks=tracks.slice(bassRow);
+const groups=['Drums','Percussion & FX','Bass & Synth','All'];
+const transitions=['No transition FX','Reverse riser','Sub impact','Riser + impact','Percussion accent'];
+const trackGroup = row => row<drumCount?0:row<bassRow?1:2;
+const shown = row => layer===3||trackGroup(row)===layer;
+const noteNames=['C','C♯','D','D♯','E','F','F♯','G','G♯','A','A♯','B'];
+const noteLabel = midi => noteNames[midi%12]+(Math.floor(midi/12)-1);
+const noteOptions = noteTracks.map(([, ,base])=>Array.from({length:25},(_,i)=>[i-12,noteLabel(base+i-12)]));
 const resolutions = [[2,'1/8'],[4,'1/16'],[6,'1/16 Triplets'],[8,'1/32']];
 const styles = ['Rock Tom Run','Linear Snare/Kick','32nd-Note Build-up'];
 const presetNames = ['Standard Rock + 32nd Tom Fill','Funk Ghost-Note Groove + Linear Fill','Half-Time Groove + Triplet Fill'];
@@ -48,7 +63,7 @@ const clone = value => JSON.parse(JSON.stringify(value));
 const clamp = (value,min,max) => Math.min(max,Math.max(min,value));
 const perBeat = bar => bar.subdivision*4/bar.unit;
 const createBar = (beats=4, unit=4, subdivision=4) => ({
-  beats,unit,subdivision, hits:tracks.map(() => Array(beats*subdivision*4/unit).fill(0))
+  beats,unit,subdivision, notes:noteTracks.map(()=>0), hits:tracks.map(() => Array(beats*subdivision*4/unit).fill(0))
 });
 const createMixer = () => tracks.map(() => ({volume:80,pitch:0,mute:false,solo:false}));
 function starter(index) {
@@ -74,7 +89,7 @@ function starter(index) {
   return {bpm:[108,98,82][index],swing:index===1?18:0,bars,mixer:createMixer()};
 }
 let state=starter(0), title=presetNames[0], barClip=null, soloBar=null, fillStyle=0;
-let metronome=false, countIn=false;
+let metronome=false, countIn=false, layer=0, transition=0;
 let singleBar=true, selectedBar=0, followPlayhead=false;
 const fillIndex = () => Math.min(3,state.bars.length-1);
 function status(message){$('status').textContent=message;}
@@ -118,7 +133,16 @@ $('follow').onclick=()=>{
   followPlayhead=!followPlayhead;
   selectBar(followPlayhead&&lastFrame ? lastFrame.bar : selectedBar);
 };
+$('layer-nav').innerHTML=groups.map((group,index)=>
+  '<button type="button" data-layer="'+index+'">'+group+'</button>').join('');
+$('layer-nav').onclick=event=>{
+  const control=event.target.closest('[data-layer]');
+  if(!control) return;
+  layer=+control.dataset.layer;
+  render();
+};
 function render() {
+  [...$('layer-nav').children].forEach((control,index)=>control.setAttribute('aria-pressed',layer===index));
   const scrolls=[...$('bars').children].map(card=>card.querySelector('.grid-scroll').scrollLeft);
   selectedBar=clamp(selectedBar,0,state.bars.length-1);
   if($('bar-tabs').children.length!==state.bars.length){
@@ -144,7 +168,15 @@ function render() {
       const v=bar.hits[row][step];
       return '<div class="step-wrap'+classes+'" data-col="'+step+'"><button class="step" data-row="'+row+'" data-step="'+step+'" data-v="'+v+'" aria-label="'+tracks[row][0]+', step '+(step+1)+', '+velocityNames[v]+'"></button></div>';
     }).join('');
-    const rows=tracks.map(([track,tone],row)=>'<div class="track-label" style="--tone:'+tone+'"><i></i>'+button('preview',track,'data-row="'+row+'" title="Audition '+track+'"')+'</div>'+ '<div style="display:contents;--tone:'+tone+'">'+cells(row)+'</div>').join('');
+    const rows=tracks.map(([track,tone,base],row)=>{
+      if(!shown(row)) return '';
+      const pitched=base!==undefined;
+      const note=pitched?'<select data-key="note" data-row="'+row+'" aria-label="'+name+' '+track+
+        ' note" title="Root note for '+track+' in '+name+'">'+options(noteOptions[row-bassRow],bar.notes[row-bassRow])+'</select>':'';
+      return '<div class="track-label'+(pitched?' has-note':'')+'" style="--tone:'+tone+'"><i></i>'+
+        button('preview',track,'data-row="'+row+'" title="Audition '+track+'"')+note+
+        '</div><div style="display:contents;--tone:'+tone+'">'+cells(row)+'</div>';
+    }).join('');
     return '<section class="bar'+(fill?' fill':'')+'" data-bar="'+index+'" aria-label="'+name+'"><div class="bar-head"><div class="bar-title"><h2>'+name+'</h2><span class="tag">'+(fill?'Fill Bar':'Groove')+'</span><span class="meta">'+steps+' steps</span></div><div class="bar-tools">'+
       select('beats','Beats per bar', [3,4,5,6,7].map(n=>[n,n+' beats']),bar.beats)+
       select('unit','Beat unit',[[4,'/4'],[8,'/8']],bar.unit)+select('subdivision','Resolution',resolutions,bar.subdivision)+
@@ -152,8 +184,8 @@ function render() {
       button('clear','Clear','title="Clear bar"')+
       button('left','Shift Left','title="Shift one step left, wrapping at the bar edge"')+
       button('right','Shift Right','title="Shift one step right, wrapping at the bar edge"')+button('solo','Loop bar','title="Solo this bar" aria-pressed="'+(soloBar===index)+'"')+
-      (fill?select('style','Fill style',styles.map((style,i)=>[i,style]),fillStyle)+button('generate','Generate fill','class="generate" title="Generate random fill"'):'')+
-      '</div></div><div class="grid-scroll"><div class="grid" style="--count:'+steps+'"><div class="ruler-label">DRUM KIT</div>'+cells(null)+rows+'</div></div></section>';
+      (fill?select('style','Fill style',styles.map((style,i)=>[i,style]),fillStyle)+select('transition','Transition FX',transitions.map((name,i)=>[i,name]),transition)+button('generate','Generate fill','class="generate" title="Generate random fill"'):'')+
+      '</div></div><div class="grid-scroll"><div class="grid'+(layer>=2?' notes':'')+'" style="--count:'+steps+'"><div class="ruler-label">'+(layer===0?'DRUM KIT':layer===1?'PERCUSSION &amp; FX':layer===2?'ROOT NOTE':'LAYERS')+'</div>'+cells(null)+rows+'</div></div></section>';
   }).join('');
   [...$('bars').children].forEach((card,index)=>{card.querySelector('.grid-scroll').scrollLeft=scrolls[index]||0;});
   renderMixer();
@@ -163,6 +195,7 @@ function render() {
 }
 function renderMixer(){
   $('mix-body').innerHTML=tracks.map(([name,tone],row)=>{
+    if(!shown(row)) return '';
     const config=state.mixer[row];
     return '<div class="mix-track" data-track="'+row+'" style="--tone:'+tone+'"><div class="mix-top"><strong>'+name+'</strong>'+
       button('mute','M','aria-label="Mute '+name+'" aria-pressed="'+config.mute+'"')+
@@ -190,8 +223,8 @@ function createKit(ctx) {
   for(let i=0;i<samples.length;i++) samples[i]=Math.random()*2-1;
   return {ctx,bus,gate,noise,openHat:null,voices:new Set()};
 }
-function drum(kit,row,t,velocity,config,destination=kit.bus){
-  const {ctx}=kit, tune=2**(config.pitch/12);
+function drum(kit,row,t,velocity,config,note=0,sweepLength=.55){
+  const {ctx,bus:destination}=kit, tune=2**((config.pitch+note)/12);
   const strength=[0,.67,1,.24][velocity]*config.volume/100;
   if(!strength) return;
   const voice=ctx.createGain();
@@ -301,12 +334,72 @@ function drum(kit,row,t,velocity,config,destination=kit.bus){
     air('bandpass',1900,.78,.60,.17);
     air('highpass',4650,.65,velocity===2?.68:.44,.093);
     air('bandpass',3260,1.2,velocity===3?.17:.32,.038);
-  }else{
+  }else if(row===8){
     tone('sine',136,49,.035,1.04,.29,.002);
     tone('triangle',218,79,.019,.33,.087);
     tone('sine',104,92,.03,.17,.115);
     air('bandpass',2400,1.05,velocity===2?.38:.19,.026);
     air('bandpass',770,.88,.16,.039);
+  }else if(row===9){
+    tone('sine',873,830,.012,.62,.10);
+    tone('triangle',1481,1430,.013,.28,.062);
+    air('bandpass',2410,1.5,.34,.024);
+  }else if(row===10){
+    tone('square',562,558,.015,.29,.20);
+    tone('square',845,837,.018,.23,.135);
+    air('bandpass',2480,1.15,.12,.045);
+  }else if(row===11||row===riserRow){
+    const noise=ctx.createBufferSource(), filter=ctx.createBiquadFilter(), gain=ctx.createGain();
+    const cutoff=frequency=>clamp(frequency*tune,40,ctx.sampleRate*.45);
+    noise.buffer=kit.noise;
+    filter.type='bandpass';
+    filter.Q.value=row===11?.74:1.15;
+    filter.connect(gain).connect(voice);
+    const level=gain.gain, floor=.00001;
+    level.setValueAtTime(floor,t);
+    if(row===11){
+      filter.frequency.value=cutoff(1850);
+      for(const [offset,peak] of [[0,.62],[.011,.76],[.023,.88]]){
+        level.exponentialRampToValueAtTime(peak,t+offset+.001);
+        level.exponentialRampToValueAtTime(.038,t+offset+.008);
+      }
+      level.exponentialRampToValueAtTime(.31,t+.036);
+      level.exponentialRampToValueAtTime(floor,t+.19);
+      source(noise,filter,.19,Math.random()*.12);
+      air('highpass',4700,.72,.29,.022);
+    }else{
+      noise.loop=true;
+      filter.frequency.setValueAtTime(cutoff(440),t);
+      filter.frequency.exponentialRampToValueAtTime(cutoff(6050),t+sweepLength*.94);
+      level.exponentialRampToValueAtTime(.025,t+sweepLength*.24);
+      level.exponentialRampToValueAtTime(.76,t+sweepLength*.94);
+      level.exponentialRampToValueAtTime(floor,t+sweepLength);
+      source(noise,filter,sweepLength,Math.random()*.12);
+    }
+  }else if(row===impactRow){
+    tone('sine',88,36,.17,.95,.87,.009);
+    tone('triangle',134,63,.12,.29,.41,.006);
+    air('lowpass',580,.66,.55,.64);
+    air('bandpass',2200,.72,.24,.16);
+  }else{
+    const root=440*2**((tracks[row][2]-69)/12);
+    if(row===bassRow){
+      tone('sine',root,root,.014,.71,.32,.006);
+      tone('triangle',root*2,root*2,.014,.25,.22,.004);
+      tone('triangle',root*3,root*3,.014,.09,.10,.003);
+    }else if(row===bassRow+1){
+      // A voiced minor seventh, transposed from this bar's root.
+      for(const [interval,level] of [[0,.23],[7,.15],[15,.13],[22,.11]]){
+        const frequency=root*2**(interval/12);
+        tone('triangle',frequency,frequency,.014,level,.47,.014);
+        tone('sine',frequency*2.003,frequency*2.003,.012,level*.39,.25,.011);
+      }
+    }else{
+      tone('triangle',root,root,.012,.43,.23);
+      tone('sine',root*2,root*2,.012,.26,.13);
+      tone('sine',root*3.01,root*3.01,.012,.16,.064);
+      tone('sine',root*5.03,root*5.03,.012,.08,.032);
+    }
   }
 }
 function clickSound(kit,t,accent){
@@ -325,8 +418,16 @@ function playStep(kit,pattern,barIndex,step,t){
   const bar=pattern.bars[barIndex], hasSolo=pattern.mixer.some(track=>track.solo);
   bar.hits.forEach((hits,row)=>{
     const config=pattern.mixer[row];
-    if(hits[step]&&!config.mute&&(!hasSolo||config.solo)) drum(kit,row,t,hits[step],config);
+    if(hits[step]&&!config.mute&&(!hasSolo||config.solo)) playVoice(kit,pattern,barIndex,step,row,t,hits[step]);
   });
+}
+function playVoice(kit,pattern,barIndex,step,row,t,velocity,preview=false){
+  const bar=pattern.bars[barIndex];
+  const note=bar.notes[row-bassRow]??0;
+  const sweep=row===riserRow&&!preview
+    ?clamp((bar.beats-stepPosition(bar,step,pattern.swing))*beatDuration(pattern,bar),.014,3)
+    : .55;
+  drum(kit,row,t,velocity,pattern.mixer[row],note,sweep);
 }
 function beatDuration(pattern,bar){return 60/pattern.bpm*4/bar.unit;}
 function stepDuration(pattern,bar,step){
@@ -484,17 +585,18 @@ function draw(){
   raf=requestAnimationFrame(draw);
 }
 let raf;
-async function audition(row,velocity){
+async function audition(row,velocity,barIndex){
   try{
     await audioReady();
     auditionKit ||= createKit(context);
-    drum(auditionKit,row,context.currentTime+.006,velocity,state.mixer[row]);
+    playVoice(auditionKit,state,Math.min(barIndex,state.bars.length-1),0,row,context.currentTime+.006,velocity,true);
   }catch(error){status(error.message);}
 }
 
 function alterGrid(bar,key,value){
   const next=createBar(key==='beats'?value:bar.beats,key==='unit'?value:bar.unit,
     key==='subdivision'?value:bar.subdivision);
+  next.notes=bar.notes.slice();
   const oldStep=4/(bar.unit*perBeat(bar)), newStep=4/(next.unit*perBeat(next));
   const priority=[0,2,3,1];
   bar.hits.forEach((row,track)=>row.forEach((hit,step)=>{
@@ -506,7 +608,8 @@ function alterGrid(bar,key,value){
 }
 function generateFill(index){
   const old=state.bars[index];
-  const bar=createBar(old.beats,old.unit,fillStyle===2?8:old.subdivision), division=perBeat(bar);
+  const bar=alterGrid(old,'subdivision',fillStyle===2?8:old.subdivision), division=perBeat(bar);
+  bar.hits.slice(0,drumCount).forEach(row=>row.fill(0));
   const total=bar.hits[0].length;
   const start=Math.max(0,(bar.beats-(fillStyle===2?Math.ceil(bar.beats/2):2))*division);
   const pick=list=>list[Math.floor(Math.random()*list.length)];
@@ -523,9 +626,12 @@ function generateFill(index){
       (step%2?pick([7,7,4,5,6]):pick([8,8,7])):progress<.65?7:pick([7,4,5,6]);
     bar.hits[row][step]=step===total-1||step%division===0?2:row===7&&Math.random()<.45?3:1;
   }
+  if(transition===1||transition===3) bar.hits[riserRow][total-division]=1;
+  if(transition===2||transition===3) bar.hits[impactRow][total-1]=2;
+  if(transition===4) bar.hits[pick([9,10,11])][total-1]=2;
   replaceBar(index,bar);
   render();
-  status(styles[fillStyle]+' generated.');
+  status(styles[fillStyle]+' generated'+(transition?' · '+transitions[transition]:'')+'.');
 }
 function setStep(button,value){
   const {row,step}=button.dataset;
@@ -544,7 +650,7 @@ $('bars').addEventListener('pointerdown',event=>{
   const value=(+pad.dataset.v+1)%4;
   drag={id:event.pointerId,value,seen:new Set([pad]),last:pad};
   setStep(pad,value);
-  if(value&&!running) audition(+pad.dataset.row,value);
+  if(value&&!running) audition(+pad.dataset.row,value,+pad.closest('.bar').dataset.bar);
 });
 window.addEventListener('pointermove',event=>{
   if(!drag||drag.id!==event.pointerId) return;
@@ -570,7 +676,7 @@ $('bars').addEventListener('click',event=>{
   if(pad&&event.detail===0){
     const value=(+pad.dataset.v+1)%4;
     setStep(pad,value);
-    if(value&&!running) audition(+pad.dataset.row,value);
+    if(value&&!running) audition(+pad.dataset.row,value,+pad.closest('.bar').dataset.bar);
     return;
   }
   const control=event.target.closest('[data-action]');
@@ -578,7 +684,7 @@ $('bars').addEventListener('click',event=>{
   const index=+control.closest('.bar').dataset.bar;
   const bar=state.bars[index];
   switch(control.dataset.action){
-    case 'preview': audition(+control.dataset.row,1);return;
+    case 'preview': audition(+control.dataset.row,1,index);return;
     case 'copy':
       barClip=clone(bar);
       $('bars').querySelectorAll('[data-action="paste"]').forEach(paste=>{paste.disabled=false;});
@@ -599,6 +705,11 @@ $('bars').addEventListener('change',event=>{
   const index=+event.target.closest('.bar').dataset.bar;
   const value=+event.target.value;
   if(key==='style'){fillStyle=value;return;}
+  if(key==='transition'){transition=value;return;}
+  if(key==='note'){
+    state.bars[index].notes[+event.target.dataset.row-bassRow]=value;
+    return;
+  }
   replaceBar(index,alterGrid(state.bars[index],key,value));
   render();
   $('bars').children[index].querySelector('[data-key="'+key+'"]').focus({preventScroll:true});
@@ -694,15 +805,21 @@ function validatedPattern(data){
   const integer=(value,low,high)=>Number.isInteger(value)&&value>=low&&value<=high;
   if(!data||!integer(data.bpm,30,300)||!integer(data.swing,0,65)||
     !Array.isArray(data.bars)||!integer(data.bars.length,1,8)||
-    !Array.isArray(data.mixer)||data.mixer.length!==tracks.length)
+    !Array.isArray(data.mixer)||![drumCount,tracks.length].includes(data.mixer.length))
     throw new Error('Invalid pattern settings.');
+  const channels=data.mixer.length;
   const bars=data.bars.map(bar=>{
     if(!bar||!integer(bar.beats,3,7)||![4,8].includes(bar.unit)||
       !resolutions.some(([n])=>n===bar.subdivision)||!Array.isArray(bar.hits)||
-      bar.hits.length!==tracks.length||bar.hits.some(row=>!Array.isArray(row)||
+      bar.hits.length!==channels||bar.hits.some(row=>!Array.isArray(row)||
         row.length!==bar.beats*perBeat(bar)||row.some(hit=>!integer(hit,0,3))))
       throw new Error('Invalid bar or step data.');
-    return {beats:bar.beats,unit:bar.unit,subdivision:bar.subdivision,hits:clone(bar.hits)};
+    if(bar.notes!==undefined&&(!Array.isArray(bar.notes)||bar.notes.length!==noteTracks.length||
+      bar.notes.some(note=>!integer(note,-12,12)))) throw new Error('Invalid bar notes.');
+    const next=createBar(bar.beats,bar.unit,bar.subdivision);
+    bar.hits.forEach((row,index)=>{next.hits[index]=row.slice();});
+    if(bar.notes) next.notes=bar.notes.slice();
+    return next;
   });
   const mixer=data.mixer.map(track=>{
     if(!track||!integer(track.volume,0,120)||!integer(track.pitch,-12,12)||
@@ -710,6 +827,7 @@ function validatedPattern(data){
       throw new Error('Invalid mixer settings.');
     return {volume:track.volume,pitch:track.pitch,mute:track.mute,solo:track.solo};
   });
+  mixer.push(...createMixer().slice(channels));
   return {bpm:data.bpm,swing:data.swing,bars,mixer};
 }
 const storageKey='backbeat.presets.v1';
@@ -783,7 +901,7 @@ function download(blob,extension){
   setTimeout(()=>URL.revokeObjectURL(url),1500);
 }
 $('json').onclick=()=>{
-  download(new Blob([JSON.stringify({version:1,name:title,pattern:state},null,2)],{type:'application/json'}),'json');
+  download(new Blob([JSON.stringify({version:2,name:title,pattern:state},null,2)],{type:'application/json'}),'json');
   status('JSON exported.');
 };
 $('import').onclick=()=>$('file').click();
@@ -793,7 +911,7 @@ $('file').onchange=async event=>{
   if(!file) return;
   try{
     const data=JSON.parse(await file.text());
-    if(data?.version!==1) throw new Error('Unsupported pattern version.');
+    if(![1,2].includes(data?.version)) throw new Error('Unsupported pattern version.');
     const name=typeof data.name==='string'?data.name.trim().slice(0,100):'';
     loadPattern(validatedPattern(data.pattern),name||'Imported pattern');
   }catch(error){status('Import failed. '+error.message);}
