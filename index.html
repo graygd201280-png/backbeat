@@ -13,31 +13,220 @@ header{border-bottom:1px solid var(--line);background:#14161c}.mast,main{max-wid
 @media(max-width:600px){:root{--step:30px;--label:96px}.mast,main{padding-inline:11px}.brand strong{font-size:20px}.transport{padding:11px;gap:9px}.readout{margin:0}.track-label{padding-left:5px;font-size:12px}.status{margin-left:0}.bar-head{padding:9px}.tools button{font-size:13px}}
 .layer-nav{margin-bottom:12px}.layer-nav button{font-size:13px}.track-label.has-note{display:grid;grid-template-columns:6px minmax(0,1fr) auto;gap:4px;padding-right:4px}.track-label button{text-overflow:ellipsis;overflow:hidden;white-space:nowrap}.track-label select{min-width:0;width:50px;padding:2px;font:11px ui-monospace,monospace;border-radius:4px}.grid.notes{--label:154px}.mixer{max-height:calc(100dvh - 20px);overflow:auto}
 @media(max-width:1050px){.mixer{max-height:none}}
+
+.mast{position:relative;padding-left:83px}#language{position:absolute;left:30px;top:18px;min-width:42px;color:var(--violet);font-weight:700}
+[dir=rtl] .grid-scroll,[dir=rtl] .readout{direction:ltr}
+[dir=rtl] .track-label button,[dir=rtl] .ruler-label{direction:rtl;text-align:right}
+[dir=rtl] .readout,[dir=rtl] .status{margin-left:0;margin-inline-start:auto}
+[dir=rtl] #previous,[dir=rtl] #next{transform:scaleX(-1)}
+@media(max-width:600px){.mast{padding-left:62px}#language{left:11px;top:15px}}
 </style>
 </head>
 <body>
 <header><div class="mast">
-<div class="brand"><span class="logo" aria-hidden="true"><i></i><i></i><i></i><i></i></span><div><strong>Backbeat</strong><small>Drum sequencer &amp; fill generator</small></div></div>
-<div class="tools"><button id="save">Save preset</button><select id="presets" aria-label="Load preset"><option value="">Load preset…</option></select><button id="import">Import JSON</button><button id="json">Export JSON</button><button id="wav">Export WAV</button><input hidden type="file" id="file" accept=".json,application/json"></div>
+<button id="language" type="button" lang="he" aria-label="מעבר לעברית">HE</button>
+<div class="brand"><span class="logo" aria-hidden="true"><i></i><i></i><i></i><i></i></span><div><strong>Backbeat</strong><small data-i18n="Drum sequencer &amp; fill generator">Drum sequencer &amp; fill generator</small></div></div>
+<div class="tools"><button id="save" data-i18n="Save preset">Save preset</button><select id="presets" aria-label="Load preset" data-i18n-aria-label="Load preset"><option value="" data-i18n="Load preset…">Load preset…</option></select><button id="import" data-i18n="Import JSON">Import JSON</button><button id="json" data-i18n="Export JSON">Export JSON</button><button id="wav" data-i18n="Export WAV">Export WAV</button><input hidden type="file" id="file" accept=".json,application/json"></div>
 </div></header>
 <main>
-<section class="transport" aria-label="Transport">
-<button id="play" class="primary" title="Spacebar">▶ Play</button>
-<label for="bpm">BPM</label><input type="number" id="bpm" min="30" max="300" value="108"><input type="range" id="tempo" min="30" max="300" value="108" aria-label="Tempo BPM">
-<button id="tap">Tap tempo</button>
-<label for="swing">Swing <output id="swing-value">0%</output></label><input type="range" id="swing" min="0" max="65" value="0">
-<button id="click" aria-pressed="false">Metronome</button><button id="count" aria-pressed="false">Count-in</button><div id="readout" class="readout">STOPPED</div>
+<section class="transport" aria-label="Transport" data-i18n-aria-label="Transport">
+<button id="play" class="primary" title="Spacebar" data-i18n-title="Spacebar">▶ Play</button>
+<label for="bpm" data-i18n="BPM">BPM</label><input type="number" id="bpm" min="30" max="300" value="108"><input type="range" id="tempo" min="30" max="300" value="108" aria-label="Tempo BPM" data-i18n-aria-label="Tempo BPM">
+<button id="tap" data-i18n="Tap tempo">Tap tempo</button>
+<label for="swing"><span data-i18n="Swing">Swing</span> <output id="swing-value">0%</output></label><input type="range" id="swing" min="0" max="65" value="0">
+<button id="click" aria-pressed="false" data-i18n="Metronome">Metronome</button><button id="count" aria-pressed="false" data-i18n="Count-in">Count-in</button><div id="readout" class="readout">STOPPED</div>
 </section>
-<div class="section-head"><div><h1>Pattern editor</h1><p class="meta" id="pattern"></p></div><div class="tools"><button id="dup">Duplicate Bar 1 → 2 &amp; 3</button><button id="add">+ Add Bar</button><button id="remove">− Remove Bar</button><button id="clear-all">Clear All Bars</button><button id="mix" aria-pressed="false">Mixer</button></div></div>
-<nav class="tools bar-nav" aria-label="Bar view"><button id="all-view" aria-pressed="false">All Bars</button><button id="single-view" aria-pressed="true">Single Bar</button><button id="previous" aria-label="Previous bar">&lt;</button><div id="bar-tabs" class="bar-tabs" role="group" aria-label="Select bar"></div><button id="next" aria-label="Next bar">&gt;</button><button id="follow" aria-pressed="false">Follow Playhead</button></nav>
-<div id="layer-nav" class="tools layer-nav" role="group" aria-label="Track layers"></div>
-<div class="legend"><span><b>■</b> Normal</span><span><b>◆</b> Accent</span><span><b class="ghost">●</b> Ghost</span><span>Click to cycle · Drag to paint · Right-click to clear</span><span id="status" class="status" role="status"></span></div>
-<div class="layout" id="layout"><div id="bars"></div><aside class="mixer" id="mixer" hidden><h2>Kit mixer</h2><div id="mix-body" class="mix-body"></div></aside></div>
+<div class="section-head"><div><h1 data-i18n="Pattern editor">Pattern editor</h1><p class="meta" id="pattern"></p></div><div class="tools"><button id="dup" data-i18n="Duplicate Bar 1 → 2 &amp; 3">Duplicate Bar 1 → 2 &amp; 3</button><button id="add" data-i18n="+ Add Bar">+ Add Bar</button><button id="remove" data-i18n="− Remove Bar">− Remove Bar</button><button id="clear-all" data-i18n="Clear All Bars">Clear All Bars</button><button id="mix" aria-pressed="false" data-i18n="Mixer">Mixer</button></div></div>
+<nav class="tools bar-nav" aria-label="Bar view" data-i18n-aria-label="Bar view"><button id="all-view" aria-pressed="false" data-i18n="All Bars">All Bars</button><button id="single-view" aria-pressed="true" data-i18n="Single Bar">Single Bar</button><button id="previous" aria-label="Previous bar" data-i18n-aria-label="Previous bar">&lt;</button><div id="bar-tabs" class="bar-tabs" role="group" aria-label="Select bar" data-i18n-aria-label="Select bar"></div><button id="next" aria-label="Next bar" data-i18n-aria-label="Next bar">&gt;</button><button id="follow" aria-pressed="false" data-i18n="Follow Playhead">Follow Playhead</button></nav>
+<div id="layer-nav" class="tools layer-nav" role="group" aria-label="Track layers" data-i18n-aria-label="Track layers"></div>
+<div class="legend"><span><b>■</b> <span data-i18n="Normal">Normal</span></span><span><b>◆</b> <span data-i18n="Accent">Accent</span></span><span><b class="ghost">●</b> <span data-i18n="Ghost">Ghost</span></span><span data-i18n="Click to cycle · Drag to paint · Right-click to clear">Click to cycle · Drag to paint · Right-click to clear</span><span id="status" class="status" role="status"></span></div>
+<div class="layout" id="layout"><div id="bars"></div><aside class="mixer" id="mixer" hidden><h2 data-i18n="Kit mixer">Kit mixer</h2><div id="mix-body" class="mix-body"></div></aside></div>
 </main>
-<dialog id="save-dialog"><form method="dialog"><h2>Save custom preset</h2><label>Preset name<input required maxlength="60" id="preset-name" type="text"></label><div class="tools"><button value="cancel" formnovalidate>Cancel</button><button value="save" class="primary">Save</button></div></form></dialog>
+<dialog id="save-dialog"><form method="dialog"><h2 data-i18n="Save custom preset">Save custom preset</h2><label><span data-i18n="Preset name">Preset name</span><input required maxlength="60" id="preset-name" type="text"></label><div class="tools"><button value="cancel" formnovalidate data-i18n="Cancel">Cancel</button><button value="save" class="primary" data-i18n="Save">Save</button></div></form></dialog>
 <script>
 'use strict';
 const $ = id => document.getElementById(id);
+
+const hebrew = {
+  "Drum sequencer & fill generator": "סיקוונסר תופים ומחולל מעברים",
+  "Save preset": "שמירת תבנית",
+  "Load preset": "טעינת תבנית",
+  "Load preset…": "טעינת תבנית…",
+  "Import JSON": "ייבוא JSON",
+  "Export JSON": "ייצוא JSON",
+  "Export WAV": "ייצוא WAV",
+  "Transport": "בקרת נגינה",
+  "▶ Play": "▶ נגן",
+  "■ Stop": "■ עצור",
+  "Spacebar": "מקש רווח",
+  "BPM": "פעימות לדקה",
+  "Tempo BPM": "קצב בפעימות לדקה",
+  "Tap tempo": "קביעת קצב בהקשה",
+  "Swing": "סווינג",
+  "Metronome": "מטרונום",
+  "Count-in": "ספירה מקדימה",
+  "STOPPED": "נעצר",
+  "COUNT-IN": "ספירה מקדימה",
+  "BAR": "תיבה",
+  "STEP": "צעד",
+  "Pattern editor": "עורך המקצב",
+  "Duplicate Bar 1 → 2 & 3": "העתקת תיבה 1 לתיבות 2 ו־3",
+  "+ Add Bar": "+ הוספת תיבה",
+  "− Remove Bar": "− הסרת תיבה",
+  "Clear All Bars": "ניקוי כל התיבות",
+  "Mixer": "מיקסר",
+  "Bar view": "תצוגת תיבות",
+  "All Bars": "כל התיבות",
+  "Single Bar": "תיבה בודדת",
+  "Previous bar": "תיבה קודמת",
+  "Select bar": "בחירת תיבה",
+  "Next bar": "תיבה הבאה",
+  "Follow Playhead": "מעקב אחר סמן הנגינה",
+  "Track layers": "שכבות צליל",
+  "Normal": "רגיל",
+  "Accent": "הדגשה",
+  "Ghost": "מכת רפאים",
+  "Empty": "ריק",
+  "Click to cycle · Drag to paint · Right-click to clear": "לחיצה לשינוי עוצמה · גרירה למילוי צעדים · לחיצה ימנית למחיקה",
+  "Kit mixer": "מיקסר הערוצים",
+  "Save custom preset": "שמירת תבנית אישית",
+  "Preset name": "שם התבנית",
+  "Cancel": "ביטול",
+  "Save": "שמירה",
+  "Switch to English": "מעבר לאנגלית",
+  "Crash Cymbal": "מצילת קראש",
+  "Ride Cymbal": "מצילת רייד",
+  "Open Hi-Hat": "היי־האט פתוח",
+  "Closed Hi-Hat": "היי־האט סגור",
+  "High Tom": "טום גבוה",
+  "Mid Tom": "טום אמצעי",
+  "Floor Tom": "טום רצפה",
+  "Snare Drum": "סנר",
+  "Kick Drum": "תוף בס",
+  "Rim / Woodblock": "מכת שוליים / בלוק עץ",
+  "Cowbell": "פעמון פרה",
+  "Clap / Snap": "מחיאת כף / נקישת אצבעות",
+  "Reverse Riser": "אפקט עלייה הפוך",
+  "Sub Impact": "מכת בס עמוקה",
+  "Synth Bass": "בס סינתיסייזר",
+  "Chord Stab": "אקורד קצר",
+  "Arp Pluck": "פריטת ארפג׳יו",
+  "Drums": "תופים",
+  "Percussion & FX": "כלי הקשה ואפקטים",
+  "Bass & Synth": "בס וסינתיסייזר",
+  "All": "הכול",
+  "No transition FX": "ללא אפקט מעבר",
+  "Reverse riser": "אפקט עלייה הפוך",
+  "Sub impact": "מכת בס עמוקה",
+  "Riser + impact": "עלייה ומכת בס",
+  "Percussion accent": "הדגשת כלי הקשה",
+  "1/16 Triplets": "טריולות 1/16",
+  "Rock Tom Run": "מעבר טומים בסגנון רוק",
+  "Linear Snare/Kick": "מעבר סנר ותוף בס לסירוגין",
+  "32nd-Note Build-up": "מעבר מתגבר בחלקי שלושים ושתיים",
+  "Standard Rock + 32nd Tom Fill": "רוק קלאסי עם מעבר טומים בחלקי שלושים ושתיים",
+  "Funk Ghost-Note Groove + Linear Fill": "פאנק עם מכות רפאים ומעבר לסירוגין",
+  "Half-Time Groove + Triplet Fill": "מקצב חצי־זמן עם מעבר טריולות",
+  "Bar {0}": "תיבה {0}",
+  "{0} bar": "תיבה אחת",
+  "{0} bars": "{0} תיבות",
+  "{0} steps": "{0} צעדים",
+  "{0} beats": "{0} פעימות",
+  "{0}, step {1}, {2}": "{0}, צעד {1}, {2}",
+  "{0} {1} note": "צליל השורש של {1}, {0}",
+  "Root note for {0} in {1}": "צליל השורש של {0} ב{1}",
+  "Audition {0}": "השמעת {0}",
+  "Fill Bar": "תיבת מעבר",
+  "Groove": "מקצב",
+  "Beats per bar": "פעימות בתיבה",
+  "Beat unit": "יחידת פעימה",
+  "Resolution": "חלוקת פעימה",
+  "Copy": "העתקה",
+  "Paste": "הדבקה",
+  "Clear": "ניקוי",
+  "Loop bar": "ניגון בלולאה",
+  "Shift Left": "הזזה שמאלה",
+  "Shift Right": "הזזה ימינה",
+  "Copy bar": "העתקת תיבה",
+  "Paste bar": "הדבקת תיבה",
+  "Clear bar": "ניקוי תיבה",
+  "Shift one step left, wrapping at the bar edge": "הזזה צעד אחד שמאלה עם גלישה לקצה השני",
+  "Shift one step right, wrapping at the bar edge": "הזזה צעד אחד ימינה עם גלישה לקצה השני",
+  "Solo this bar": "ניגון התיבה הזו בלבד",
+  "Fill style": "סגנון מעבר",
+  "Transition FX": "אפקט מעבר",
+  "Generate fill": "יצירת מעבר",
+  "Generate random fill": "יצירת מעבר אקראי",
+  "DRUM KIT": "מערכת תופים",
+  "PERCUSSION & FX": "הקשה ואפקטים",
+  "ROOT NOTE": "צליל שורש",
+  "LAYERS": "שכבות",
+  "Mute {0}": "השתקת {0}",
+  "Solo {0}": "נגינת {0} בלבד",
+  "Clear {0} in all bars": "ניקוי {0} בכל התיבות",
+  "Clear track in all bars": "ניקוי הערוץ בכל התיבות",
+  "Vol": "עוצמה",
+  "Tune": "כיוון",
+  " st": " חצאי טון",
+  "Web Audio is unavailable in this browser.": "Web Audio אינו זמין בדפדפן הזה.",
+  "{0} generated{1}.": "נוצר מעבר בסגנון {0}{1}.",
+  "Bar {0} copied.": "תיבה {0} הועתקה.",
+  "Pasted into Bar {0}.": "התוכן הודבק בתיבה {0}.",
+  "Bar {0} cleared.": "תיבה {0} נוקתה.",
+  "Bar 1 copied to Bars 2 and 3.": "תיבה 1 הועתקה לתיבות 2 ו־3.",
+  "Clear every step in all bars?": "לנקות את כל הצעדים בכל התיבות?",
+  "All bars cleared.": "כל התיבות נוקו.",
+  "{0} cleared in all bars.": "הערוץ {0} נוקה בכל התיבות.",
+  "Invalid pattern settings.": "הגדרות המקצב אינן תקינות.",
+  "Invalid bar or step data.": "נתוני התיבה או הצעדים אינם תקינים.",
+  "Invalid bar notes.": "התווים בתיבה אינם תקינים.",
+  "Invalid mixer settings.": "הגדרות המיקסר אינן תקינות.",
+  "Starter presets": "תבניות מובנות",
+  "Saved presets": "תבניות שמורות",
+  "{0} loaded.": "התבנית ״{0}״ נטענה.",
+  "Enter a preset name.": "יש להזין שם לתבנית.",
+  "Saved “{0}”.": "התבנית ״{0}״ נשמרה.",
+  "Preset storage is unavailable. Export JSON to save this pattern.": "לא ניתן לשמור תבניות בדפדפן. אפשר לייצא JSON כדי לשמור את המקצב.",
+  "JSON exported.": "קובץ JSON יוצא.",
+  "Unsupported pattern version.": "גרסת הקובץ אינה נתמכת.",
+  "Imported pattern": "מקצב מיובא",
+  "Import failed. {0}": "הייבוא נכשל. {0}",
+  "Rendering full loop…": "מייצא את הלולאה המלאה…",
+  "Offline Web Audio is unavailable.": "ייצוא שמע באמצעות Web Audio אינו זמין.",
+  "WAV exported · {0} s.": "קובץ WAV יוצא · {0} שניות.",
+  "WAV export failed. {0}": "ייצוא WAV נכשל. {0}"
+};
+let language='en';
+try{if(localStorage.getItem('backbeat.language')==='he') language='he';}catch{}
+function t(message,...values){
+  const label=language==='he'&&Object.hasOwn(hebrew,message)?hebrew[message]:message;
+  return label.replace(/\{(\d+)\}/g,(token,index)=>values[index]??token);
+}
+function localizePage(){
+  document.documentElement.lang=language;
+  document.documentElement.dir=language==='he'?'rtl':'ltr';
+  document.title=language==='he'?'Backbeat — סיקוונסר תופים':'Backbeat — Drum Sequencer';
+  for(const node of document.querySelectorAll('[data-i18n]'))
+    node.textContent=t(node.getAttribute('data-i18n'));
+  for(const attribute of ['aria-label','title']){
+    for(const node of document.querySelectorAll('[data-i18n-'+attribute+']'))
+      node.setAttribute(attribute,t(node.getAttribute('data-i18n-'+attribute)));
+  }
+  const control=$('language');
+  control.textContent=language==='he'?'EN':'HE';
+  control.lang=language==='he'?'en':'he';
+  control.setAttribute('aria-label',language==='he'?t('Switch to English'):'מעבר לעברית');
+}
+$('language').onclick=()=>{
+  language=language==='he'?'en':'he';
+  try{localStorage.setItem('backbeat.language',language);}catch{}
+  localizePage();
+  presetMenu();
+  transportUI();
+  refreshStatus();
+  render(true);
+};
+
 const tracks = [
   ['Crash Cymbal','#ffcb76'], ['Ride Cymbal','#ebaa53'], ['Open Hi-Hat','#e8bc76'],
   ['Closed Hi-Hat','#d6a85e'], ['High Tom','#83e6ec'], ['Mid Tom','#62bde9'],
@@ -88,16 +277,33 @@ function starter(index) {
   }
   return {bpm:[108,98,82][index],swing:index===1?18:0,bars,mixer:createMixer()};
 }
-let state=starter(0), title=presetNames[0], barClip=null, soloBar=null, fillStyle=0;
+let state=starter(0), title=presetNames[0], builtInTitle=true, barClip=null, soloBar=null, fillStyle=0;
 let metronome=false, countIn=false, layer=0, transition=0;
 let singleBar=true, selectedBar=0, followPlayhead=false;
 const fillIndex = () => Math.min(3,state.bars.length-1);
-function status(message){$('status').textContent=message;}
+let lastStatus=[];
+function status(message,...values){
+  lastStatus=[message,...values];
+  refreshStatus();
+}
+function refreshStatus(){
+  $('status').textContent=lastStatus.length?t(lastStatus[0],...lastStatus.slice(1).map(value=>
+    typeof value==='function'?value():value)):'';
+}
+const titleLabel = () => builtInTitle?t(title):title;
+const barName = index => t('Bar {0}',index+1);
+function patternLabel(){
+  const count=state.bars.length;
+  $('pattern').textContent=titleLabel()+' · '+t(count===1?'{0} bar':'{0} bars',count);
+}
+function stepLabel(row,step,velocity){
+  return t('{0}, step {1}, {2}',t(tracks[row][0]),step+1,t(velocityNames[velocity]));
+}
 function options(items,selected){
-  return items.map(([value,label])=>'<option value="'+value+'"'+(value===selected?' selected':'')+'>'+label+'</option>').join('');
+  return items.map(([value,label])=>'<option value="'+value+'"'+(value===selected?' selected':'')+'>'+t(label)+'</option>').join('');
 }
 function button(action,label,extra=''){
-  return '<button type="button" data-action="'+action+'" '+extra+'>'+label+'</button>';
+  return '<button type="button" data-action="'+action+'" '+extra+'>'+t(label)+'</button>';
 }
 function renderView(){
   $('all-view').setAttribute('aria-pressed',!singleBar);
@@ -134,30 +340,33 @@ $('follow').onclick=()=>{
   selectBar(followPlayhead&&lastFrame ? lastFrame.bar : selectedBar);
 };
 $('layer-nav').innerHTML=groups.map((group,index)=>
-  '<button type="button" data-layer="'+index+'">'+group+'</button>').join('');
+  '<button type="button" data-layer="'+index+'">'+t(group)+'</button>').join('');
 $('layer-nav').onclick=event=>{
   const control=event.target.closest('[data-layer]');
   if(!control) return;
   layer=+control.dataset.layer;
   render();
 };
-function render() {
-  [...$('layer-nav').children].forEach((control,index)=>control.setAttribute('aria-pressed',layer===index));
+function render(relabel=false) {
+  [...$('layer-nav').children].forEach((control,index)=>{
+    if(relabel) control.textContent=t(groups[index]);
+    control.setAttribute('aria-pressed',layer===index);
+  });
   const scrolls=[...$('bars').children].map(card=>card.querySelector('.grid-scroll').scrollLeft);
   selectedBar=clamp(selectedBar,0,state.bars.length-1);
-  if($('bar-tabs').children.length!==state.bars.length){
+  if(relabel||$('bar-tabs').children.length!==state.bars.length){
     $('bar-tabs').innerHTML=state.bars.map((_,index)=>
-      '<button type="button" data-index="'+index+'">Bar '+(index+1)+'</button>').join('');
+      '<button type="button" data-index="'+index+'">'+barName(index)+'</button>').join('');
   }
-  $('pattern').textContent=title+' · '+state.bars.length+(state.bars.length===1?' bar':' bars');
+  patternLabel();
   $('bpm').value=$('tempo').value=state.bpm;
   $('swing').value=state.swing;
   $('swing-value').textContent=state.swing+'%';
   $('add').disabled=state.bars.length===8;
   $('remove').disabled=state.bars.length===1;
   $('bars').innerHTML=state.bars.map((bar,index)=>{
-    const fill=index===fillIndex(), name='Bar '+(index+1), division=perBeat(bar), steps=bar.beats*division;
-    const select=(key,label,items,value)=>'<select data-key="'+key+'" aria-label="'+name+' '+label+'" title="'+label+'">'+options(items,value)+'</select>';
+    const fill=index===fillIndex(), name=barName(index), division=perBeat(bar), steps=bar.beats*division;
+    const select=(key,label,items,value)=>'<select data-key="'+key+'" aria-label="'+name+' '+t(label)+'" title="'+t(label)+'">'+options(items,value)+'</select>';
     const cells = (row) => Array.from({length:steps},(_,step)=>{
       const part=step%division, beat=Math.floor(step/division);
       const classes=(beat%2?' alt':'')+(part===0?' beat':'');
@@ -166,26 +375,26 @@ function render() {
         return '<div class="ruler'+classes+'" data-col="'+step+'">'+(part?subdivisionMarks[division][part]:beat+1)+'</div>';
       }
       const v=bar.hits[row][step];
-      return '<div class="step-wrap'+classes+'" data-col="'+step+'"><button class="step" data-row="'+row+'" data-step="'+step+'" data-v="'+v+'" aria-label="'+tracks[row][0]+', step '+(step+1)+', '+velocityNames[v]+'"></button></div>';
+      return '<div class="step-wrap'+classes+'" data-col="'+step+'"><button class="step" data-row="'+row+'" data-step="'+step+'" data-v="'+v+'" aria-label="'+stepLabel(row,step,v)+'"></button></div>';
     }).join('');
     const rows=tracks.map(([track,tone,base],row)=>{
       if(!shown(row)) return '';
       const pitched=base!==undefined;
-      const note=pitched?'<select data-key="note" data-row="'+row+'" aria-label="'+name+' '+track+
-        ' note" title="Root note for '+track+' in '+name+'">'+options(noteOptions[row-bassRow],bar.notes[row-bassRow])+'</select>':'';
+      const note=pitched?'<select data-key="note" data-row="'+row+'" aria-label="'+t('{0} {1} note',name,t(track))+
+        '" title="'+t('Root note for {0} in {1}',t(track),name)+'">'+options(noteOptions[row-bassRow],bar.notes[row-bassRow])+'</select>':'';
       return '<div class="track-label'+(pitched?' has-note':'')+'" style="--tone:'+tone+'"><i></i>'+
-        button('preview',track,'data-row="'+row+'" title="Audition '+track+'"')+note+
+        button('preview',track,'data-row="'+row+'" title="'+t('Audition {0}',t(track))+'"')+note+
         '</div><div style="display:contents;--tone:'+tone+'">'+cells(row)+'</div>';
     }).join('');
-    return '<section class="bar'+(fill?' fill':'')+'" data-bar="'+index+'" aria-label="'+name+'"><div class="bar-head"><div class="bar-title"><h2>'+name+'</h2><span class="tag">'+(fill?'Fill Bar':'Groove')+'</span><span class="meta">'+steps+' steps</span></div><div class="bar-tools">'+
-      select('beats','Beats per bar', [3,4,5,6,7].map(n=>[n,n+' beats']),bar.beats)+
+    return '<section class="bar'+(fill?' fill':'')+'" data-bar="'+index+'" aria-label="'+name+'"><div class="bar-head"><div class="bar-title"><h2>'+name+'</h2><span class="tag">'+t(fill?'Fill Bar':'Groove')+'</span><span class="meta">'+t('{0} steps',steps)+'</span></div><div class="bar-tools">'+
+      select('beats','Beats per bar', [3,4,5,6,7].map(n=>[n,t('{0} beats',n)]),bar.beats)+
       select('unit','Beat unit',[[4,'/4'],[8,'/8']],bar.unit)+select('subdivision','Resolution',resolutions,bar.subdivision)+
-      button('copy','Copy','title="Copy bar"')+button('paste','Paste','title="Paste bar"'+(barClip?'':' disabled'))+
-      button('clear','Clear','title="Clear bar"')+
-      button('left','Shift Left','title="Shift one step left, wrapping at the bar edge"')+
-      button('right','Shift Right','title="Shift one step right, wrapping at the bar edge"')+button('solo','Loop bar','title="Solo this bar" aria-pressed="'+(soloBar===index)+'"')+
-      (fill?select('style','Fill style',styles.map((style,i)=>[i,style]),fillStyle)+select('transition','Transition FX',transitions.map((name,i)=>[i,name]),transition)+button('generate','Generate fill','class="generate" title="Generate random fill"'):'')+
-      '</div></div><div class="grid-scroll"><div class="grid'+(layer>=2?' notes':'')+'" style="--count:'+steps+'"><div class="ruler-label">'+(layer===0?'DRUM KIT':layer===1?'PERCUSSION &amp; FX':layer===2?'ROOT NOTE':'LAYERS')+'</div>'+cells(null)+rows+'</div></div></section>';
+      button('copy','Copy','title="'+t('Copy bar')+'"')+button('paste','Paste','title="'+t('Paste bar')+'"'+(barClip?'':' disabled'))+
+      button('clear','Clear','title="'+t('Clear bar')+'"')+
+      button('left','Shift Left','title="'+t('Shift one step left, wrapping at the bar edge')+'"')+
+      button('right','Shift Right','title="'+t('Shift one step right, wrapping at the bar edge')+'"')+button('solo','Loop bar','title="'+t('Solo this bar')+'" aria-pressed="'+(soloBar===index)+'"')+
+      (fill?select('style','Fill style',styles.map((style,i)=>[i,style]),fillStyle)+select('transition','Transition FX',transitions.map((name,i)=>[i,name]),transition)+button('generate','Generate fill','class="generate" title="'+t('Generate random fill')+'"'):'')+
+      '</div></div><div class="grid-scroll"><div class="grid'+(layer>=2?' notes':'')+'" style="--count:'+steps+'"><div class="ruler-label">'+t(['DRUM KIT','PERCUSSION & FX','ROOT NOTE','LAYERS'][layer])+'</div>'+cells(null)+rows+'</div></div></section>';
   }).join('');
   [...$('bars').children].forEach((card,index)=>{card.querySelector('.grid-scroll').scrollLeft=scrolls[index]||0;});
   renderMixer();
@@ -197,12 +406,12 @@ function renderMixer(){
   $('mix-body').innerHTML=tracks.map(([name,tone],row)=>{
     if(!shown(row)) return '';
     const config=state.mixer[row];
-    return '<div class="mix-track" data-track="'+row+'" style="--tone:'+tone+'"><div class="mix-top"><strong>'+name+'</strong>'+
-      button('mute','M','aria-label="Mute '+name+'" aria-pressed="'+config.mute+'"')+
-      button('solo','S','aria-label="Solo '+name+'" aria-pressed="'+config.solo+'"')+
-      button('clear-track','Clear','aria-label="Clear '+name+' in all bars" title="Clear track in all bars"')+'</div>'+
+    return '<div class="mix-track" data-track="'+row+'" style="--tone:'+tone+'"><div class="mix-top"><strong>'+t(name)+'</strong>'+
+      button('mute','M','aria-label="'+t('Mute {0}',t(name))+'" aria-pressed="'+config.mute+'"')+
+      button('solo','S','aria-label="'+t('Solo {0}',t(name))+'" aria-pressed="'+config.solo+'"')+
+      button('clear-track','Clear','aria-label="'+t('Clear {0} in all bars',t(name))+'" title="'+t('Clear track in all bars')+'"')+'</div>'+
       [['volume','Vol',0,120,'%'],['pitch','Tune',-12,12,' st']].map(([key,label,min,max,suffix])=>
-      '<label>'+label+'<input data-key="'+key+'" data-suffix="'+suffix+'" aria-label="'+name+' '+label+'" type="range" min="'+min+'" max="'+max+'" value="'+config[key]+'"><output>'+config[key]+suffix+'</output></label>').join('')+'</div>';
+      '<label>'+t(label)+'<input data-key="'+key+'" data-suffix="'+t(suffix)+'" aria-label="'+t(name)+' '+t(label)+'" type="range" min="'+min+'" max="'+max+'" value="'+config[key]+'"><output>'+config[key]+t(suffix)+'</output></label>').join('')+'</div>';
   }).join('');
 }
 
@@ -452,8 +661,8 @@ async function audioReady(){
   return context;
 }
 function transportUI(){
-  $('play').textContent=running?'■ Stop':'▶ Play';
-  if(!running) $('readout').textContent='STOPPED';
+  $('play').textContent=t(running?'■ Stop':'▶ Play');
+  if(!running) $('readout').textContent=t('STOPPED');
 }
 function disposeKit(kit){
   const now=kit.ctx.currentTime;
@@ -566,11 +775,11 @@ function draw(){
     else [...$('bar-tabs').children].forEach((tab,i)=>tab.classList.toggle('is-playing',i===bar&&count===null));
     const card=$('bars').children[bar];
     if(count!==null){
-      $('readout').textContent='COUNT-IN · '+(count+1)+' / '+beats;
+      $('readout').textContent=t('COUNT-IN')+' · '+(count+1)+' / '+beats;
     }else if(card){
       const measure=state.bars[bar], currentStep=Math.floor(step*perBeat(measure)/division);
       const visibleStep=currentStep<measure.hits[0].length;
-      $('readout').textContent='BAR '+(bar+1)+(visibleStep?' · STEP '+(currentStep+1):'');
+      $('readout').textContent=t('BAR')+' '+(bar+1)+(visibleStep?' · '+t('STEP')+' '+(currentStep+1):'');
       lit=[card,...card.querySelectorAll('[data-col="'+currentStep+'"]')];
       lit.forEach((node,i)=>node.classList.add(i?'current':'playing'));
       if(!card.hidden&&(soloBar!==null||(singleBar&&followPlayhead))){
@@ -631,14 +840,15 @@ function generateFill(index){
   if(transition===4) bar.hits[pick([9,10,11])][total-1]=2;
   replaceBar(index,bar);
   render();
-  status(styles[fillStyle]+' generated'+(transition?' · '+transitions[transition]:'')+'.');
+  const style=styles[fillStyle], effect=transition?transitions[transition]:null;
+  status('{0} generated{1}.',()=>t(style),()=>effect?' · '+t(effect):'');
 }
 function setStep(button,value){
   const {row,step}=button.dataset;
   const bar=+button.closest('.bar').dataset.bar;
   state.bars[bar].hits[row][step]=value;
   button.dataset.v=value;
-  button.setAttribute('aria-label',tracks[row][0]+', step '+(+step+1)+', '+velocityNames[value]);
+  button.setAttribute('aria-label',stepLabel(+row,+step,value));
 }
 const stepButton=target=>target.closest?.('.step');
 let drag;
@@ -688,10 +898,10 @@ $('bars').addEventListener('click',event=>{
     case 'copy':
       barClip=clone(bar);
       $('bars').querySelectorAll('[data-action="paste"]').forEach(paste=>{paste.disabled=false;});
-      status('Bar '+(index+1)+' copied.');
+      status('Bar {0} copied.',index+1);
       return;
-    case 'paste': if(barClip){replaceBar(index,clone(barClip));status('Pasted into Bar '+(index+1)+'.');}break;
-    case 'clear': bar.hits.forEach(row=>row.fill(0));status('Bar '+(index+1)+' cleared.');break;
+    case 'paste': if(barClip){replaceBar(index,clone(barClip));status('Pasted into Bar {0}.',index+1);}break;
+    case 'clear': bar.hits.forEach(row=>row.fill(0));status('Bar {0} cleared.',index+1);break;
     case 'left': bar.hits.forEach(row=>row.push(row.shift()));break;
     case 'right': bar.hits.forEach(row=>row.unshift(row.pop()));break;
     case 'solo': loopBar(index);return;
@@ -736,7 +946,7 @@ $('remove').onclick=()=>{
   render();
 };
 $('clear-all').onclick=()=>{
-  if(!window.confirm('Clear every step in all bars?')) return;
+  if(!window.confirm(t('Clear every step in all bars?'))) return;
   state.bars.forEach(bar=>bar.hits.forEach(row=>row.fill(0)));
   $('bars').querySelectorAll('.step[data-v]:not([data-v="0"])').forEach(pad=>setStep(pad,0));
   status('All bars cleared.');
@@ -754,7 +964,7 @@ $('mix-body').addEventListener('click',event=>{
   if(key==='clear-track'){
     state.bars.forEach(bar=>bar.hits[row].fill(0));
     $('bars').querySelectorAll('.step[data-row="'+row+'"]').forEach(pad=>setStep(pad,0));
-    status(tracks[row][0]+' cleared in all bars.');
+    status('{0} cleared in all bars.',()=>t(tracks[row][0]));
     return;
   }
   const config=state.mixer[row];
@@ -845,28 +1055,29 @@ function presetMenu(){
   const list=$('presets');
   list.length=1;
   const builtIn=document.createElement('optgroup');
-  builtIn.label='Starter presets';
-  presetNames.forEach((name,index)=>builtIn.append(new Option(name,'starter:'+index)));
+  builtIn.label=t('Starter presets');
+  presetNames.forEach((name,index)=>builtIn.append(new Option(t(name),'starter:'+index)));
   list.append(builtIn);
   if(presets.length){
     const custom=document.createElement('optgroup');
-    custom.label='Saved presets';
+    custom.label=t('Saved presets');
     presets.forEach(({name},index)=>custom.append(new Option(name,'custom:'+index)));
     list.append(custom);
   }
 }
-function loadPattern(pattern,name){
+function loadPattern(pattern,name,builtIn=false){
+  builtInTitle=builtIn;
   stop();
   state=pattern;
   title=name;
   soloBar=null;
   selectedBar=0;
   render();
-  status(name+' loaded.');
+  status('{0} loaded.',()=>builtIn?t(name):name);
 }
 $('presets').onchange=event=>{
   const [source,index]=event.target.value.split(':');
-  if(source==='starter') loadPattern(starter(+index),presetNames[index]);
+  if(source==='starter') loadPattern(starter(+index),presetNames[index],true);
   if(source==='custom') loadPattern(clone(presets[index].state),presets[index].name);
   event.target.value='';
 };
@@ -885,9 +1096,10 @@ $('save-dialog').addEventListener('close',()=>{
     localStorage.setItem(storageKey,JSON.stringify(next));
     presets=next;
     title=name;
+    builtInTitle=false;
     presetMenu();
-    $('pattern').textContent=title+' · '+state.bars.length+(state.bars.length===1?' bar':' bars');
-    status('Saved “'+name+'”.');
+    patternLabel();
+    status('Saved “{0}”.',name);
   }catch{status('Preset storage is unavailable. Export JSON to save this pattern.');}
 });
 function download(blob,extension){
@@ -913,8 +1125,8 @@ $('file').onchange=async event=>{
     const data=JSON.parse(await file.text());
     if(![1,2].includes(data?.version)) throw new Error('Unsupported pattern version.');
     const name=typeof data.name==='string'?data.name.trim().slice(0,100):'';
-    loadPattern(validatedPattern(data.pattern),name||'Imported pattern');
-  }catch(error){status('Import failed. '+error.message);}
+    loadPattern(validatedPattern(data.pattern),name||t('Imported pattern'));
+  }catch(error){status('Import failed. {0}',()=>t(error.message));}
 };
 function encodeWav(buffer,start,length){
   const channels=buffer.numberOfChannels, bytes=length*channels*2;
@@ -960,11 +1172,13 @@ $('wav').onclick=async()=>{
     }
     const buffer=await offline.startRendering();
     download(encodeWav(buffer,frames,frames),'wav');
-    status('WAV exported · '+seconds.toFixed(2)+' s.');
-  }catch(error){status('WAV export failed. '+error.message);}
+    status('WAV exported · {0} s.',seconds.toFixed(2));
+  }catch(error){status('WAV export failed. {0}',()=>t(error.message));}
   finally{control.disabled=false;}
 };
+localizePage();
 presetMenu();
+transportUI();
 render();
 </script>
 </body>
